@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--定义别名-->
+    <typeAliases>
+        <typeAlias alias="role" type="com.learn.chapter2.po.Role"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="com.learn.chapter2.typeHandler.SexEnumTypeHandler"
+                     javaType="com.learn.chapter2.enums.Sex"/>
+    </typeHandlers>
+    <objectFactory type="com.learn.chapter2.objectFactory.MyObjectFactory">
+        <property name="name" value="MyObjectFactory"/>
+    </objectFactory>
+    <!--定义数据库信息，默认使用development数据库构建环境-->
+    <environments default="development">
+        <environment id="development">
+            <!--采用jdbc事物管理-->
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!--配置数据库链接信息-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="chl1327"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/learn/chapter2/mapper/roleMapper.xml"/>
+        <mapper resource="com/learn/chapter2/mapper/userMapper.xml"/>
+    </mappers>
+</configuration>
